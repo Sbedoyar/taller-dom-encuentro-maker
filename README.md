@@ -55,7 +55,7 @@ Léelos antes de empezar. Ahí está el patrón que se espera en tu código: sel
 
 **Las tres que definen la evaluación:**
 
-1. **Se trabaja en equipos de 3 personas.** Ni de 2 ni de 4.
+1. **Se trabaja en equipos de "Maximo" de 3 personas.**.
 2. **El taller se resuelve en casa. En clase se sustenta.** El profesor asigna la feature que hay que codificar en vivo, y no se anuncia con anticipación cuál será.
 3. **Hay 20 minutos para resolver la feature asignada**, partiendo del proyecto base sin resolver. El cronómetro corre desde que se abre el editor.
 
@@ -94,7 +94,7 @@ Las cinco son independientes entre sí. Puedes resolverlas en cualquier orden y 
 
 ### Feature 1: contador de caracteres en observaciones
 
-> Como participante quiero saber cuánto espacio me queda en el campo de observaciones, para no quedarme a mitad de una frase.
+> Como participante quiere saber cuánto espacio me queda en el campo de observaciones, para no quedarme a mitad de una frase.
 
 **Criterios de aceptación**
 
@@ -196,7 +196,7 @@ Una forma que funciona:
 
 ## Entrega
 
-**Antes de la clase**
+**Antes de la clase (opcional)**
 
 - Repositorio con las ramas y los pull requests de cada feature.
 - La rama `main` con las cinco features integradas y funcionando.
@@ -204,7 +204,7 @@ Una forma que funciona:
 **En clase**
 
 - El profesor asigna una feature y quién la codifica.
-- Se parte del proyecto base sin resolver, no del repositorio del equipo.
+- Se parte del proyecto base sin resolver, no del repositorio del equipo (en caso de que sus soluciones esten en un repositorio).
 - 20 minutos de reloj. Se puede consultar la documentación de MDN, no el código propio ni el de nadie más.
 - Al terminar, quien codificó explica su solución con estas tres frases: qué elemento seleccioné, qué evento escuché y qué modifiqué del DOM.
 
