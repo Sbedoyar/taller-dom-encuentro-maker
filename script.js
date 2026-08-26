@@ -51,8 +51,32 @@ btnVolver.addEventListener("click", volverAlFormulario);
 
 // ✍️ FEATURE 1: contador de caracteres en observaciones
 
+const observaciones = document.getElementById("observaciones");
+const limiteCaracteres = 200;
 
+observaciones.maxLength = limiteCaracteres;
 
+const contador = document.createElement("p");
+contador.classList.add("contador");
+
+observaciones.after(contador);
+
+function actualizarContador() {
+  const caracteresEscritos = observaciones.value.length;
+  contador.textContent = caracteresEscritos + " / " + limiteCaracteres;
+  contador.classList.remove("contador--alerta");
+  contador.classList.remove("contador--limite");
+
+  if (caracteresEscritos === limiteCaracteres) {
+    contador.classList.add("contador--limite");
+  } else if (caracteresEscritos >= 150){
+    contador.classList.add("contador--alerta");
+  }
+}
+
+actualizarContador();
+
+observaciones.addEventListener("input",actualizarContador);
 
 // 📧 FEATURE 2: validación del correo electrónico
 
