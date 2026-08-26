@@ -115,8 +115,42 @@ correo.addEventListener("blur", validarCorreo);
 
 // 🎟️ FEATURE 3: límite de talleres seleccionables
 
+const grupoTalleres = document.getElementById("grupo-talleres");
+const talleres = grupoTalleres.querySelectorAll('input[name="taller"]');
+const contadorTaller = document.createElement("p");
+contadorTaller.classList.add("contador");
+grupoTalleres.after(contadorTaller);
+const limiteTalleres = 2;
 
+function actualizarTalleres () {
+  const talleresSeleccionados = grupoTalleres.querySelectorAll('input[name="taller"]:checked');
+  const cantidadSeleccionados = talleresSeleccionados.length;
+  contadorTaller.textContent = "Talleres seleccionados: " + cantidadSeleccionados +  " de " + limiteTalleres;
+  contadorTaller.classList.remove("contador--limite");
 
+  if(cantidadSeleccionados === limiteTalleres) {
+    contadorTaller.classList.add("contador--limite");
+
+  }
+  talleres.forEach((taller) => {
+    if (cantidadSeleccionados === limiteTalleres 
+      && !taller.checked
+    ){
+      taller.disabled = true;
+      taller.parentElement.classList.add("opcion--bloqueada");
+    } else {
+      taller.disabled = false;
+      taller.parentElement.classList.remove("opcion--bloqueada");
+    }
+
+  });
+}
+
+talleres.forEach((taller) => {
+    taller.addEventListener("change", actualizarTalleres);
+});
+
+actualizarTalleres();
 
 // 💰 FEATURE 4: cálculo del total de la inscripción
 
