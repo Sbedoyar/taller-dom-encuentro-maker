@@ -182,67 +182,54 @@ adicionales.forEach((adicional) => {
 calcularTotal();
 
 // 👥 FEATURE 5: registro de acompañantes
-
-const nombreAcompanante = document.getElementById("acompanante-nombre");
-const parentescoAcompanante = document.getElementById("acompanante-parentesco");
+const acompananteNombre = document.getElementById("acompanante-nombre");
+const acompananteParentesco = document.getElementById("acompanante-parentesco");
 const botonAgregar = document.getElementById("btn-agregar-acompanante");
 const listaAcompanantes = document.getElementById("lista-acompanantes");
-
-const mensajeAcompanante = document.createElement("p");
-mensajeAcompanante.className = "mensaje-error";
-nombreAcompanante.after(mensajeAcompanante);
+const mensajeErrorAcomp = document.createElement("p");
+mensajeErrorAcomp.classList.add("mensaje-error");
+acompananteNombre.after(mensajeErrorAcomp);
 
 function agregarAcompanante() {
-    const nombre = nombreAcompanante.value.trim();
+  const nombre = acompananteNombre.value.trim();
 
-    if (!nombre) {
-        mensajeAcompanante.textContent = "Escribe el nombre del acompañante.";
-        return;
-    }
+  if (!nombre) {
+    mensajeErrorAcomp.textContent = "Escribe el nombre del acompañante."
+    return;
+  }
+  mensajeErrorAcomp.textContent = "";
 
-    mensajeAcompanante.textContent = "";
+  const item = document.createElement("li");
+  const botonEliminar = document.createElement("button");
 
-    const item = document.createElement("li");
-    const botonEliminar = document.createElement("button");
+  botonEliminar.type = "button";
+  botonEliminar.textContent = "Eliminar";
+  botonEliminar.classList.add("boton-mini");
 
-    botonEliminar.type = "button";
-    botonEliminar.textContent = "Eliminar";
-    botonEliminar.className = "boton-mini";
+  item.append(nombre + " - " + acompananteParentesco.selectedOptions[0].textContent, " ", botonEliminar);
 
-    item.append(
-        nombre + " — " + parentescoAcompanante.selectedOptions[0].textContent, botonEliminar
-    );
+  listaAcompanantes.append(item);
 
-    listaAcompanantes.append(item);
+  acompananteNombre.value = "";
+  acompananteNombre.focus();
 
-    nombreAcompanante.value = "";
-    nombreAcompanante.focus();
+  botonAgregar.disabled = listaAcompanantes.children.length >= 4;
 
-    botonAgregar.disabled =
-        listaAcompanantes.children.length >= 4;
+  function eliminarAcompanante() {
+    item.remove();
+    botonAgregar.disabled = false;
+  }
 
-    function eliminarAcompanante() {
-        item.remove();
-        botonAgregar.disabled = false;
-    }
-
-    botonEliminar.addEventListener(
-        "click",
-        eliminarAcompanante
-    );
+  botonEliminar.addEventListener("click", eliminarAcompanante);
 }
 
-botonAgregar.addEventListener(
-    "click",
-    agregarAcompanante
-);
+botonAgregar.addEventListener("click", agregarAcompanante);
+
 
 // 👥 FEATURE 6: 
 
 const casillaTerminos = document.getElementById("terminos");
-
-const botonConfirmarInscripcion =
-    document.getElementById("btn-enviar");
+const botonConfirmarInscripcion = document.getElementById("btn-enviar");
 
 function actualizarEstadoConfirmacion() {
     botonConfirmarInscripcion.disabled =
