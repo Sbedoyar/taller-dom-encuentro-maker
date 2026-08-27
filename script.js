@@ -154,7 +154,104 @@ actualizarTalleres();
 
 // 💰 FEATURE 4: cálculo del total de la inscripción
 
+const valorTotal = document.getElementById("valor-total");
+const modalidades = document.querySelectorAll('input[name="modalidad"]');
+const adicionales = document.querySelectorAll('input[name="adicional"]');
 
+function calcularTotal() {
+  const modalidadSeleccionada =  document.querySelector('input[name="modalidad"]:checked');
+  let total = Number(modalidadSeleccionada.dataset.precio);
+  adicionales.forEach((adicional) => {
+      if (adicional.checked) {
+          total += Number(adicional.dataset.precio);
+      }
+  });
 
+  valorTotal.textContent =
+      "$" + total.toLocaleString("es-CO");
+}
+
+modalidades.forEach((modalidad) => {
+    modalidad.addEventListener("change", calcularTotal);
+});
+
+adicionales.forEach((adicional) => {
+    adicional.addEventListener("change", calcularTotal);
+});
+
+calcularTotal();
 
 // 👥 FEATURE 5: registro de acompañantes
+
+const nombreAcompanante = document.getElementById("acompanante-nombre");
+const parentescoAcompanante = document.getElementById("acompanante-parentesco");
+const botonAgregar = document.getElementById("btn-agregar-acompanante");
+const listaAcompanantes = document.getElementById("lista-acompanantes");
+
+const mensajeAcompanante = document.createElement("p");
+mensajeAcompanante.className = "mensaje-error";
+nombreAcompanante.after(mensajeAcompanante);
+
+function agregarAcompanante() {
+    const nombre = nombreAcompanante.value.trim();
+
+    if (!nombre) {
+        mensajeAcompanante.textContent = "Escribe el nombre del acompañante.";
+        return;
+    }
+
+    mensajeAcompanante.textContent = "";
+
+    const item = document.createElement("li");
+    const botonEliminar = document.createElement("button");
+
+    botonEliminar.type = "button";
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.className = "boton-mini";
+
+    item.append(
+        nombre + " — " + parentescoAcompanante.selectedOptions[0].textContent, botonEliminar
+    );
+
+    listaAcompanantes.append(item);
+
+    nombreAcompanante.value = "";
+    nombreAcompanante.focus();
+
+    botonAgregar.disabled =
+        listaAcompanantes.children.length >= 4;
+
+    function eliminarAcompanante() {
+        item.remove();
+        botonAgregar.disabled = false;
+    }
+
+    botonEliminar.addEventListener(
+        "click",
+        eliminarAcompanante
+    );
+}
+
+botonAgregar.addEventListener(
+    "click",
+    agregarAcompanante
+);
+
+// 👥 FEATURE 6: 
+
+const casillaTerminos = document.getElementById("terminos");
+
+const botonConfirmarInscripcion =
+    document.getElementById("btn-enviar");
+
+function actualizarEstadoConfirmacion() {
+    botonConfirmarInscripcion.disabled =
+        !casillaTerminos.checked;
+}
+
+casillaTerminos.addEventListener(
+    "change",
+    actualizarEstadoConfirmacion
+);
+
+actualizarEstadoConfirmacion();
